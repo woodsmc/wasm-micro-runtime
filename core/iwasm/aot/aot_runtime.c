@@ -42,6 +42,9 @@ bh_static_assert(offsetof(AOTModuleInstance, cur_exception)
 bh_static_assert(offsetof(AOTModuleInstance, global_table_data)
                  == 13 * sizeof(uint64) + 128 + 11 * sizeof(uint64));
 
+bh_static_assert(sizeof(AOTMemoryInstance) == 104);
+bh_static_assert(offsetof(AOTTableInstance, elems) == 8);
+
 bh_static_assert(offsetof(AOTModuleInstanceExtra, stack_sizes) == 0);
 
 static void
@@ -2486,13 +2489,13 @@ aot_table_init(AOTModuleInstance *module_inst, uint32 tbl_idx,
     tbl_seg = module->table_init_data_list[tbl_seg_idx];
     bh_assert(tbl_seg);
 
-    if (!length) {
+    if (offset_len_out_of_bounds(src_offset, length, tbl_seg->func_index_count)
+        || offset_len_out_of_bounds(dst_offset, length, tbl_inst->cur_size)) {
+        aot_set_exception_with_id(module_inst, EXCE_OUT_OF_BOUNDS_TABLE_ACCESS);
         return;
     }
 
-    if (length + src_offset > tbl_seg->func_index_count
-        || dst_offset + length > tbl_inst->cur_size) {
-        aot_set_exception_with_id(module_inst, EXCE_OUT_OF_BOUNDS_TABLE_ACCESS);
+    if (!length) {
         return;
     }
 
@@ -2525,8 +2528,9 @@ aot_table_copy(AOTModuleInstance *module_inst, uint32 src_tbl_idx,
     dst_tbl_inst = module_inst->tables[dst_tbl_idx];
     bh_assert(dst_tbl_inst);
 
-    if ((uint64)dst_offset + length > dst_tbl_inst->cur_size
-        || (uint64)src_offset + length > src_tbl_inst->cur_size) {
+    if (offset_len_out_of_bounds(dst_offset, length, dst_tbl_inst->cur_size)
+        || offset_len_out_of_bounds(src_offset, length,
+                                    src_tbl_inst->cur_size)) {
         aot_set_exception_with_id(module_inst, EXCE_OUT_OF_BOUNDS_TABLE_ACCESS);
         return;
     }
@@ -2551,7 +2555,7 @@ aot_table_fill(AOTModuleInstance *module_inst, uint32 tbl_idx, uint32 length,
     tbl_inst = module_inst->tables[tbl_idx];
     bh_assert(tbl_inst);
 
-    if (data_offset + length > tbl_inst->cur_size) {
+    if (offset_len_out_of_bounds(data_offset, length, tbl_inst->cur_size)) {
         aot_set_exception_with_id(module_inst, EXCE_OUT_OF_BOUNDS_TABLE_ACCESS);
         return;
     }
