@@ -747,6 +747,115 @@ functions_instantiate(const WASMModule *module, WASMModuleInstance *module_inst,
 }
 
 /**
+ * Destroy tags instances.
+ */
+static void
+tags_deinstantiate(WASMTagInstance *tags, uint32 count)
+{
+    if (tags) {
+        wasm_runtime_free(tags);
+    }
+}
+
+/**
+ * Instantiate tags in a module.
+ */
+static WASMTagInstance *
+tags_instantiate(const WASMModule *module, WASMModuleInstance *module_inst,
+                      char *error_buf, uint32 error_buf_size)
+{
+    WASMImport *import;
+    uint32 i,
+        tag_count = module->import_tag_count + module->tag_count;
+    uint64 total_size = sizeof(WASMTagInstance) * (uint64)tag_count;
+    WASMTagInstance *tags, *tag;
+
+    if (!(tags = runtime_malloc(total_size, error_buf, error_buf_size))) {
+        return NULL;
+    }
+
+    total_size = sizeof(void *) * (uint64)module->import_tag_count;
+    if (total_size > 0
+        && !(module_inst->import_tag_ptrs =
+                 runtime_malloc(total_size, error_buf, error_buf_size))) {
+        wasm_runtime_free(tags);
+        return NULL;
+    }
+
+    /* instantiate tags from import section */
+    tag = tags;
+    import = module->import_tags;
+    for (i = 0; i < module->import_tag_count; i++, import++) {
+        tag->is_import_tag = true;
+
+#if WASM_ENABLE_MULTI_MODULE != 0
+        if (import->u.tag.import_module) {
+            if(!(tag->import_module_inst = get_sub_module_inst(
+                        module_inst, import->u.tag.import_module) {
+                set_error_buf(error_buf, error_buf_size, "unknown tag");
+                goto fail;
+            }
+
+            if(!(tag->import_tag_inst = wasm_lookup_tag(
+                        tag->import_module_inst,
+                        import->u.tag.field_name, NULL)) {
+                set_error_buf(error_buf, error_buf_size, "unknown global");
+                goto fail;
+            }
+        }
+#endif /* WASM_ENABLE_MULTI_MODULE */
+
+        tag->type = import->u.tag.tag_type
+        tag->u.tag_import = &import->u.tag;
+        tag->param_cell_num = import->u.tag.tag_type->param_cell_num;
+        tag->ret_cell_num = import->u.tag.tag_type->ret_cell_num;
+        tag->param_count =
+            (uint16)tag->u.tag_import->tag_type->param_count;
+        tag->param_types = function->u.tag_import->tag_type->types;
+        tag->local_cell_num = 0;
+        tag->local_count = 0;
+        tag->local_types = NULL;
+
+        /* Copy the tag pointer to current instance */
+        module_inst->import_tag_ptrs[i] =
+            tag->u.tag_import->tag_ptr_linked;
+
+        tag++;
+    }
+
+    /* instantiate tags from tag section */
+    for (i = 0; i < module->tag_count; i++) {
+        tag->is_import_func = false;
+        tag->u.tag = module->tags[i];
+
+        tag->param_cell_num = tag->u.tag->param_cell_num;
+        tag->ret_cell_num = function->u.func->ret_cell_num;
+        tag->local_cell_num = function->u.func->local_cell_num;
+
+        tag->param_count =
+            (uint16)function->u.func->func_type->param_count;
+        tag->local_count = (uint16)function->u.func->local_count;
+        tag->param_types = function->u.func->func_type->types;
+        tag->local_types = function->u.func->local_types;
+
+        tag->local_offsets = function->u.func->local_offsets;
+
+#if WASM_ENABLE_FAST_INTERP != 0
+        tag->const_cell_num = function->u.func->const_cell_num;
+#endif
+
+        tag++;
+    }
+    bh_assert((uint32)(tag - tags) == tag_count);
+
+    return tags;
+
+fail:
+    wasm_runtime_free(tags);
+    return NULL;
+}
+
+/**
  * Destroy global instances.
  */
 static void
@@ -1770,6 +1879,11 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
 
     /* export */
     module_inst->export_func_count = get_export_count(module, EXPORT_KIND_FUNC);
+
+#if WASM_ENABLE_TAGS != 0
+    module_inst->export_tag_count = get_export_count(module, EXPORT_KIND_TAG);
+#endif
+
 #if WASM_ENABLE_MULTI_MODULE != 0
     module_inst->export_table_count =
         get_export_count(module, EXPORT_KIND_TABLE);
@@ -1779,7 +1893,7 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
         get_export_count(module, EXPORT_KIND_GLOBAL);
 #endif
 
-    /* Instantiate memories/tables/functions */
+    /* Instantiate memories/tables/functions/tags */
     if ((module_inst->memory_count > 0
          && !(module_inst->memories = memories_instantiate(
                   module, module_inst, heap_size, error_buf, error_buf_size)))
@@ -2310,6 +2424,21 @@ wasm_lookup_table(const WASMModuleInstance *module_inst, const char *name)
     (void)module_inst->export_tables;
     return module_inst->tables[0];
 }
+
+#if WASM_ENABLE_TAGS != 0
+WASMTagInstance *
+wasm_lookup_tag(const WASMModuleInstance *module_inst, const char *name,
+                     const char *signature)
+{
+    uint32 i;
+    for (i = 0; i < module_inst->export_tag_count; i++)
+        if (!strcmp(module_inst->export_tags[i].name, name))
+            return module_inst->export_tags[i].function;
+    (void)signature;
+    return NULL;
+}
+#endif
+
 #endif
 
 #ifdef OS_ENABLE_HW_BOUND_CHECK

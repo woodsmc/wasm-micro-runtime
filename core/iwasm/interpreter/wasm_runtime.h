@@ -27,6 +27,10 @@ typedef struct WASMMemoryInstance WASMMemoryInstance;
 typedef struct WASMTableInstance WASMTableInstance;
 typedef struct WASMGlobalInstance WASMGlobalInstance;
 
+#if WASM_ENABLE_TAGS != 0
+typedef struct WASMTagInstance WASMTagInstance;
+#endif 
+
 /**
  * When LLVM JIT, WAMR compiler or AOT is enabled, we should ensure that
  * some offsets of the same field in the interpreter module instance and
@@ -179,6 +183,25 @@ struct WASMFunctionInstance {
 #endif
 };
 
+#if WASM_ENABLE_TAGS != 0
+typedef struct WASMTagInstance WASMTagInstance {
+    bool is_import_tag;
+    /* tag attribute */
+    uint8 attribute;
+    /* tag type index */
+    uint32 type;
+    union {
+        WASMTagImport *tag_import;
+        WASMTag *tag;
+    } u;
+
+#if WASM_ENABLE_MULTI_MODULE != 0
+    WASMModuleInstance *import_module_inst;
+    WASMTagInstance *import_tag_inst;
+#endif
+};
+#endif
+
 typedef struct WASMExportFuncInstance {
     char *name;
     WASMFunctionInstance *function;
@@ -198,6 +221,13 @@ typedef struct WASMExportMemInstance {
     char *name;
     WASMMemoryInstance *memory;
 } WASMExportMemInstance;
+
+#if WASM_ENABLE_TAGS != 0
+typedef struct WASMExportTagInstance {
+    WASMTagInstance *tag;
+} WASMExportMemInstance;
+#endif
+
 
 /* wasm-c-api import function info */
 typedef struct CApiFuncImport {
@@ -277,9 +307,16 @@ struct WASMModuleInstance {
     uint32 export_global_count;
     uint32 export_memory_count;
     uint32 export_table_count;
+    #if WASM_ENABLE_TAGS != 0
+    uint32 export_tag_count;
+    #endif
+    
     /* For AOTModuleInstance, it denotes `AOTFunctionInstance *` */
     DefPointer(WASMExportFuncInstance *, export_functions);
     DefPointer(WASMExportGlobInstance *, export_globals);
+#if WASM_ENABLE_TAGS != 0
+    DefPointer(WASMExportTagInstance *, export_tags);
+#endif    
     DefPointer(WASMExportMemInstance *, export_memories);
     DefPointer(WASMExportTabInstance *, export_tables);
 
@@ -317,6 +354,8 @@ struct WASMModuleInstance {
     /* WASM/AOT module extra info, for AOTModuleInstance,
        it denotes `AOTModuleInstanceExtra *` */
     DefPointer(WASMModuleInstanceExtra *, e);
+    /* Array of tag pointers */
+    DefPointer(void **, import_tag_ptrs);
 
     /* Default WASM operand stack size */
     uint32 default_wasm_stack_size;
