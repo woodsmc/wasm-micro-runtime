@@ -224,13 +224,16 @@ typedef struct WASMFunctionImport {
 
 #if WASM_ENABLE_TAGS != 0
 typedef struct WASMTagImport {
+    char *module_name;
+    char *field_name;
     uint8 attribute; /* the type of the tag (numerical) */
     uint32 type;     /* the type of the catch function (numerical)*/
     WASMType *tag_type;
     uint32 tag_index_linked;
+    void *tag_ptr_linked;
+
 #if WASM_ENABLE_MULTI_MODULE != 0
-    /* imported function pointer after linked */
-    /* TODO: remove if not needed */
+    /* imported tag  pointer after linked */
     WASMModule *import_module;
     WASMTag *import_tag_linked;
 #endif
@@ -341,6 +344,7 @@ struct WASMFunction {
 struct WASMTag {
     uint8 attribute; /* the attribute property of the tag (expected to be 0) */
     uint32 type; /* the type of the tag (expected valid inden in type table) */
+    WASMType *tag_type;
 };
 #endif
 
@@ -506,7 +510,7 @@ struct WASMModule {
     WASMTable *tables;
     WASMMemory *memories;
 #if WASM_ENABLE_TAGS != 0
-    WASMTag *tags;
+    WASMTag **tags;
 #endif
     WASMGlobal *globals;
     WASMExport *exports;

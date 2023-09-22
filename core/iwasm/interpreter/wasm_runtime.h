@@ -26,7 +26,6 @@ typedef struct WASMFunctionInstance WASMFunctionInstance;
 typedef struct WASMMemoryInstance WASMMemoryInstance;
 typedef struct WASMTableInstance WASMTableInstance;
 typedef struct WASMGlobalInstance WASMGlobalInstance;
-
 #if WASM_ENABLE_TAGS != 0
 typedef struct WASMTagInstance WASMTagInstance;
 #endif 
@@ -182,9 +181,9 @@ struct WASMFunctionInstance {
     uint32 total_exec_cnt;
 #endif
 };
-
+ 
 #if WASM_ENABLE_TAGS != 0
-typedef struct WASMTagInstance WASMTagInstance {
+typedef struct WASMTagInstance {
     bool is_import_tag;
     /* tag attribute */
     uint8 attribute;
@@ -199,7 +198,7 @@ typedef struct WASMTagInstance WASMTagInstance {
     WASMModuleInstance *import_module_inst;
     WASMTagInstance *import_tag_inst;
 #endif
-};
+} WASMTagInstance;
 #endif
 
 typedef struct WASMExportFuncInstance {
@@ -224,8 +223,9 @@ typedef struct WASMExportMemInstance {
 
 #if WASM_ENABLE_TAGS != 0
 typedef struct WASMExportTagInstance {
+    char *name;
     WASMTagInstance *tag;
-} WASMExportMemInstance;
+} WASMExportTagInstance;
 #endif
 
 
@@ -383,7 +383,7 @@ struct WASMInterpFrame;
 typedef struct WASMInterpFrame WASMRuntimeFrame;
 
 #if WASM_ENABLE_MULTI_MODULE != 0
-typedef struct WASMSubModInstNode {
+typedef struct WASMSubModInstNode {`
     bh_list_link l;
     /* point to a string pool */
     const char *module_name;

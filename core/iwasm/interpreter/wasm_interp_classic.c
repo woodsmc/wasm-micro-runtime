@@ -1314,7 +1314,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
 
                         /* get tag type */
                         uint8 tag_type_index =
-                            module->module->tags[exception_tag_index].type;
+                            module->module->tags[exception_tag_index]->type;
                         uint32 cell_num_to_copy =
                             wasm_types[tag_type_index]->param_cell_num;
 
@@ -1439,7 +1439,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                                             uint8 tag_type_index =
                                                 module->module
                                                     ->tags[exception_tag_index]
-                                                    .type;
+                                                    ->type;
                                             uint32 cell_num_to_copy =
                                                 wasm_types[tag_type_index]
                                                     ->param_cell_num;
@@ -1516,7 +1516,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                                         uint8 tag_type_index =
                                             module->module
                                                 ->tags[exception_tag_index]
-                                                .type;
+                                                ->type;
                                         uint32 cell_num_to_copy =
                                             wasm_types[tag_type_index]
                                                 ->param_cell_num;
@@ -1566,7 +1566,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                                             uint8 tag_type_index =
                                                 module->module
                                                     ->tags[exception_tag_index]
-                                                    .type;
+                                                    ->type;
                                             uint32 cell_num_to_copy =
                                                 wasm_types[tag_type_index]
                                                     ->param_cell_num;
@@ -1625,7 +1625,7 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
 
                             /* transfer exception values */
                             uint8 tag_type_index =
-                                module->module->tags[exception_tag_index].type;
+                                module->module->tags[exception_tag_index]->type;
                             uint32 cell_num_to_copy =
                                 wasm_types[tag_type_index]->param_cell_num;
                             /* push exception values for catch
