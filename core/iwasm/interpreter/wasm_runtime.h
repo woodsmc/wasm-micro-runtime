@@ -183,7 +183,7 @@ struct WASMFunctionInstance {
 };
 
 #if WASM_ENABLE_TAGS != 0
-typedef struct WASMTagInstance {
+struct WASMTagInstance {
     bool is_import_tag;
     /* tag attribute */
     uint8 attribute;
@@ -198,9 +198,15 @@ typedef struct WASMTagInstance {
     WASMModuleInstance *import_module_inst;
     WASMTagInstance *import_tag_inst;
 #endif
-} WASMTagInstance;
+};
 #endif
 
+
+#if WASM_ENABLE_EXCE_HANDLING != 0
+#define INVALID_TAGINDEX ((uint32)0xFFFFFFFF)
+#define SET_INVALID_TAGINDEX(tag) (tag = INVALID_TAGINDEX)
+#define IS_INVALID_TAGINDEX(tag) ((tag & INVALID_TAGINDEX) == INVALID_TAGINDEX)
+#endif
 typedef struct WASMExportFuncInstance {
     char *name;
     WASMFunctionInstance *function;
@@ -288,6 +294,9 @@ struct WASMModuleInstance {
     /* global and table info */
     uint32 global_data_size;
     uint32 table_count;
+#if WASM_ENABLE_TAGS != 0
+    uint32 tag_count;
+#endif
     DefPointer(uint8 *, global_data);
     /* For AOTModuleInstance, it denotes `AOTTableInstance *` */
     DefPointer(WASMTableInstance **, tables);
@@ -298,6 +307,9 @@ struct WASMModuleInstance {
     /* function type indexes */
     DefPointer(uint32 *, func_type_indexes);
 
+#if WASM_ENABLE_TAGS != 0
+    DefPointer(WASMTagInstance *, tags);
+#endif
     uint32 export_func_count;
     uint32 export_global_count;
     uint32 export_memory_count;
