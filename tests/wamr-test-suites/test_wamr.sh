@@ -560,7 +560,10 @@ function exception_test()
     local ARGS_FOR_SPEC_TEST="-e --no_clean_up "
 
     # set log directory
-    ARGS_FOR_SPEC_TEST+="--log ${REPORT_DIR}"
+    ARGS_FOR_SPEC_TEST+="--log ${REPORT_DIR} "
+    
+    # exception handling spectest needs multi-module for import/export tag tests
+    ARGS_FOR_SPEC_TEST+="-M "
 
     cd ${WORK_DIR}
     echo "python3 ./all.py ${ARGS_FOR_SPEC_TEST} | tee -a ${REPORT_DIR}/exception_test_report.txt"
