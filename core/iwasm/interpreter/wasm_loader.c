@@ -1424,14 +1424,18 @@ load_tag_import(const uint8 **p_buf, const uint8 *buf_end,
 
             if (export->index < sub_module->import_tag_count) {
                 /* imort is an imported tag in submodule */
-                WASMTagImport *imp_tag = (WASMTagImport *)&sub_module->import_tags[export->index];
-                tag->tag_type = (WASMType *)imp_tag->tag_type;
-            } else {
-                /* import is an section tag in submodule */
-                WASMTag *imp_tag = (WASMTag *)&sub_module->tags[export->index - sub_module->import_tag_count];
+                WASMTagImport *imp_tag =
+                    (WASMTagImport *)&sub_module->import_tags[export->index];
                 tag->tag_type = (WASMType *)imp_tag->tag_type;
             }
-           
+            else {
+                /* import is an section tag in submodule */
+                WASMTag *imp_tag =
+                    (WASMTag *)&sub_module
+                        ->tags[export->index - sub_module->import_tag_count];
+                tag->tag_type = (WASMType *)imp_tag->tag_type;
+            }
+
             /* fill import tag*/
             tag->tag_index_linked = export->index;
 #if WASM_ENABLE_MULTI_MODULE != 0
@@ -2406,8 +2410,7 @@ load_export_section(const uint8 *buf, const uint8 *buf_end, WASMModule *module,
 #if WASM_ENABLE_TAGS != 0
                 /* export tag */
                 case EXPORT_KIND_TAG:
-                    if (index 
-                        >= module->tag_count + module->import_tag_count) {
+                    if (index >= module->tag_count + module->import_tag_count) {
                         set_error_buf(error_buf, error_buf_size, "unknown tag");
                         return false;
                     }
@@ -2845,22 +2848,21 @@ load_tag_section(const uint8 *buf, const uint8 *buf_end, const uint8 *buf_code,
     uint32 section_tag_count = 0;
     uint8 tag_attribute;
     uint32 tag_type;
-    WASMTag * tag = NULL;
+    WASMTag *tag = NULL;
 
     /* get tag count */
     read_leb_uint32(p, p_end, section_tag_count);
     module->tag_count = section_tag_count;
 
     if (section_tag_count) {
-        total_size = sizeof(WASMTag*) * module->tag_count;
+        total_size = sizeof(WASMTag *) * module->tag_count;
         if (!(module->tags =
                   loader_malloc(total_size, error_buf, error_buf_size))) {
             return false;
         }
         /* load each tag, imported tags precede the tags */
         uint32 tag_index;
-        for (tag_index = 0;
-             tag_index < section_tag_count; tag_index++) {
+        for (tag_index = 0; tag_index < section_tag_count; tag_index++) {
 
             /* get the one byte attribute */
             CHECK_BUF(p, p_end, 1);
@@ -2884,8 +2886,8 @@ load_tag_section(const uint8 *buf, const uint8 *buf_end, const uint8 *buf_code,
                 goto fail;
             }
 
-            if (!(tag = module->tags[tag_index] =
-                      loader_malloc(sizeof(WASMTag), error_buf, error_buf_size))) {
+            if (!(tag = module->tags[tag_index] = loader_malloc(
+                      sizeof(WASMTag), error_buf, error_buf_size))) {
                 return false;
             }
 
@@ -7790,13 +7792,16 @@ re_scan:
                     goto fail;
                 }
 
-                /* the tag_type is stored in either the WASMTag (section tags) or WASMTagImport (import tag) */
+                /* the tag_type is stored in either the WASMTag (section tags)
+                 * or WASMTagImport (import tag) */
                 WASMType *func_type = NULL;
                 if (tag_index < module->import_tag_count) {
                     func_type = module->import_tags[tag_index].u.tag.tag_type;
-                } else {
-                    func_type = module->tags[tag_index - module->import_tag_count]->tag_type;
-
+                }
+                else {
+                    func_type =
+                        module->tags[tag_index - module->import_tag_count]
+                            ->tag_type;
                 }
 #if 0
                 /* check validity of tag_type_index */
@@ -7808,7 +7813,7 @@ re_scan:
 
                 /* check, that the type of the referred tag returns void */
                 WASMType *func_type = (WASMType *)module->types[tag_type_index];
-#endif                
+#endif
                 if (func_type->result_count != 0) {
                     set_error_buf(error_buf, error_buf_size,
                                   "tag type signature does not return void");
@@ -7878,18 +7883,22 @@ re_scan:
                 /* check validity of tag_index against module->tag_count */
                 /* check tag index is within the tag index space */
                 if (tag_index >= module->import_tag_count + module->tag_count) {
-                    LOG_VERBOSE("In %s, unknown tag at WASM_OP_CATCH\n", __FUNCTION__);
+                    LOG_VERBOSE("In %s, unknown tag at WASM_OP_CATCH\n",
+                                __FUNCTION__);
                     set_error_buf(error_buf, error_buf_size, "unknown tag");
                     goto fail;
                 }
 
-                /* the tag_type is stored in either the WASMTag (section tags) or WASMTagImport (import tag) */
+                /* the tag_type is stored in either the WASMTag (section tags)
+                 * or WASMTagImport (import tag) */
                 WASMType *func_type = NULL;
                 if (tag_index < module->import_tag_count) {
                     func_type = module->import_tags[tag_index].u.tag.tag_type;
-                } else {
-                    func_type = module->tags[tag_index - module->import_tag_count]->tag_type;
-
+                }
+                else {
+                    func_type =
+                        module->tags[tag_index - module->import_tag_count]
+                            ->tag_type;
                 }
 #if 0
                 /* the index of the type stored in the tag declaration */
@@ -7904,7 +7913,7 @@ re_scan:
 
                 /* check, that the type of the referred tag returns void */
                 WASMType *func_type = module->types[tag_type_index];
-#endif                
+#endif
                 if (func_type->result_count != 0) {
                     set_error_buf(error_buf, error_buf_size,
                                   "tag type signature does not return void");

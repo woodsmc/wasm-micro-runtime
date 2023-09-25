@@ -1894,8 +1894,7 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
     module_inst->table_count = module->import_table_count + module->table_count;
     module_inst->e->function_count =
         module->import_function_count + module->function_count;
-    module_inst->tag_count =
-        module->import_tag_count + module->tag_count;
+    module_inst->tag_count = module->import_tag_count + module->tag_count;
 
     /* export */
     module_inst->export_func_count = get_export_count(module, EXPORT_KIND_FUNC);

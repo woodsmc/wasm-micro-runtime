@@ -1280,24 +1280,28 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
             /* landing pad for the rethrow ? */
             find_a_catch_handler:
             {
-                WASMType * tag_type = NULL;
+                WASMType *tag_type = NULL;
                 uint32 cell_num_to_copy = 0;
                 if (IS_INVALID_TAGINDEX(exception_tag_index)) {
-                    /* 
-                     * invalid exception index, 
-                     * generated if a submodule throws an exception 
-                     * that has not been imported here 
+                    /*
+                     * invalid exception index,
+                     * generated if a submodule throws an exception
+                     * that has not been imported here
                      *
-                     * This should result in a branch to the CATCH_ALL block, 
+                     * This should result in a branch to the CATCH_ALL block,
                      * if there is one
                      */
                     tag_type = NULL;
                     cell_num_to_copy = 0;
-                } else {
+                }
+                else {
                     if (module->tags[exception_tag_index].is_import_tag) {
-                        tag_type = module->tags[exception_tag_index].u.tag_import->tag_type;
-                    } else {
-                        tag_type = module->tags[exception_tag_index].u.tag->tag_type;
+                        tag_type = module->tags[exception_tag_index]
+                                       .u.tag_import->tag_type;
+                    }
+                    else {
+                        tag_type =
+                            module->tags[exception_tag_index].u.tag->tag_type;
                     }
                     cell_num_to_copy = tag_type->param_cell_num;
                 }
@@ -1359,19 +1363,17 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                                             /* push exception_tag_index and
                                              * exception values for rethrow */
                                             PUSH_I32(exception_tag_index);
-                                            word_copy(
-                                                frame_sp,
-                                                frame_sp_old
-                                                    - cell_num_to_copy,
-                                                cell_num_to_copy);
+                                            word_copy(frame_sp,
+                                                      frame_sp_old
+                                                          - cell_num_to_copy,
+                                                      cell_num_to_copy);
                                             frame_sp += cell_num_to_copy;
                                             /* push exception values for catch
                                              */
-                                            word_copy(
-                                                frame_sp,
-                                                frame_sp_old
-                                                    - cell_num_to_copy,
-                                                cell_num_to_copy);
+                                            word_copy(frame_sp,
+                                                      frame_sp_old
+                                                          - cell_num_to_copy,
+                                                      cell_num_to_copy);
                                             frame_sp += cell_num_to_copy;
 
                                             /* advance to handler */
@@ -1402,9 +1404,9 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
 
                                         /* push exception values for catch */
                                         word_copy(frame_sp,
-                                                    frame_sp_old
-                                                        - cell_num_to_copy,
-                                                    cell_num_to_copy);
+                                                  frame_sp_old
+                                                      - cell_num_to_copy,
+                                                  cell_num_to_copy);
                                         frame_sp += cell_num_to_copy;
 
                                         /* tag_index is already stored in
@@ -1426,11 +1428,10 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                                         /* push exception_tag_index and
                                          * exception values for rethrow */
                                         PUSH_I32(exception_tag_index);
-                                        word_copy(
-                                            frame_sp,
-                                            frame_sp_old
-                                                - cell_num_to_copy,
-                                            cell_num_to_copy);
+                                        word_copy(frame_sp,
+                                                  frame_sp_old
+                                                      - cell_num_to_copy,
+                                                  cell_num_to_copy);
                                         frame_sp += cell_num_to_copy;
                                         /* catch_all has no exception values */
 
@@ -1459,8 +1460,8 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                              * (prev_frame->sp) same behvior ad WASM_OP_RETURN
                              */
                             word_copy(prev_frame->sp,
-                                        frame_sp_old - cell_num_to_copy,
-                                        cell_num_to_copy);
+                                      frame_sp_old - cell_num_to_copy,
+                                      cell_num_to_copy);
                             prev_frame->sp += cell_num_to_copy;
                             *((int32 *)(prev_frame->sp)) = exception_tag_index;
                             prev_frame->sp++;

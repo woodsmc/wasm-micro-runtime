@@ -201,7 +201,6 @@ struct WASMTagInstance {
 };
 #endif
 
-
 #if WASM_ENABLE_EXCE_HANDLING != 0
 #define INVALID_TAGINDEX ((uint32)0xFFFFFFFF)
 #define SET_INVALID_TAGINDEX(tag) (tag = INVALID_TAGINDEX)
