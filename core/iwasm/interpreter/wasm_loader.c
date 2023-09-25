@@ -2875,8 +2875,8 @@ load_tag_section(const uint8 *buf, const uint8 *buf_end, const uint8 *buf_code,
             }
 
             /* store to module tag declarations */
-            module->tags[tag_index].attribute = tag_attribute;
-            module->tags[tag_index].type = tag_type;
+            module->tags[tag_index]->attribute = tag_attribute;
+            module->tags[tag_index]->type = tag_type;
         }
     }
 
@@ -7775,7 +7775,7 @@ re_scan:
                 }
 
                 /* the index of the type stored in the tag declaration */
-                uint8 tag_type_index = module->tags[tag_index].type;
+                uint8 tag_type_index = module->tags[tag_index]->type;
 
                 /* check validity of tag_type_index */
                 if (tag_type_index >= module->type_count) {
@@ -7860,7 +7860,7 @@ re_scan:
                 }
 
                 /* the index of the type stored in the tag declaration */
-                uint8 tag_type_index = module->tags[tag_index].type;
+                uint8 tag_type_index = module->tags[tag_index]->type;
 
                 /* check validity of tag_type_index */
                 if (tag_type_index >= module->type_count) {
