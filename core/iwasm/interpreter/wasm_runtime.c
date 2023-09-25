@@ -1064,11 +1064,14 @@ export_tags_instantiate(const WASMModule *module,
     for (i = 0; i < module->export_count; i++, export ++)
         if (export->kind == EXPORT_KIND_TAG) {
             export_tag->name = export->name;
-            export_tag->tag = module_inst->export_tags[export->index].tag;
+
+            bh_assert((uint32)(module_inst->export_tags));
+
+            export_tag->tag = &module_inst->tags[export->index];
             export_tag++;
         }
 
-    bh_assert((uint32)(export_func - export_funcs) == export_func_count);
+    bh_assert((uint32)(export_tag - export_tags) == export_tag_count);
     return export_tags;
 }
 #endif
@@ -1891,6 +1894,8 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
     module_inst->table_count = module->import_table_count + module->table_count;
     module_inst->e->function_count =
         module->import_function_count + module->function_count;
+    module_inst->tag_count =
+        module->import_tag_count + module->tag_count;
 
     /* export */
     module_inst->export_func_count = get_export_count(module, EXPORT_KIND_FUNC);
@@ -1923,6 +1928,9 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
                      error_buf, error_buf_size)))
 #if WASM_ENABLE_MULTI_MODULE != 0
 #if WASM_ENABLE_TAGS != 0
+        || (module_inst->tag_count > 0
+            && !(module_inst->tags = tags_instantiate(
+                     module, module_inst, error_buf, error_buf_size)))
         || (module_inst->export_tag_count > 0
             && !(module_inst->export_tags = export_tags_instantiate(
                      module, module_inst, module_inst->export_tag_count,
@@ -1944,7 +1952,6 @@ wasm_instantiate(WASMModule *module, bool is_sub_inst,
     ) {
         goto fail;
     }
-
     if (global_count > 0) {
         /* Initialize the global data */
         global_data = module_inst->global_data;
