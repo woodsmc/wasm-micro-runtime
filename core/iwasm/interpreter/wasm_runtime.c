@@ -751,10 +751,13 @@ functions_instantiate(const WASMModule *module, WASMModuleInstance *module_inst,
  * Destroy tags instances.
  */
 static void
-tags_deinstantiate(WASMTagInstance *tags)
+tags_deinstantiate(WASMTagInstance *tags, void **import_tag_ptrs)
 {
     if (tags) {
         wasm_runtime_free(tags);
+    }
+    if (import_tag_ptrs) {
+        wasm_runtime_free(import_tag_ptrs);
     }
 }
 
@@ -2377,7 +2380,7 @@ wasm_deinstantiate(WASMModuleInstance *module_inst, bool is_sub_inst)
     functions_deinstantiate(module_inst->e->functions,
                             module_inst->e->function_count);
 #if WASM_ENABLE_TAGS != 0
-    tags_deinstantiate(module_inst->import_tag_ptrs);
+    tags_deinstantiate(module_inst->tags, module_inst->import_tag_ptrs);
 #endif
 
     globals_deinstantiate(module_inst->e->globals);

@@ -4275,34 +4275,34 @@ wasm_interp_call_func_bytecode(WASMModuleInstance *module,
                     uint32 import_exception;
                     /* initialize imported exception index to be invalid */
                     SET_INVALID_TAGINDEX(import_exception);
+
                     /* pull external exception */
                     uint32 ext_exception = POP_I32();
 
-                    WASMModule *im_mod = cur_func->u.func_import->import_module;
-
                     /* external function came back with an exception or trap */
                     /* lookup exception in import tags */
-                    uint32 import_tag_index;
-                    for (import_tag_index = 0;
-                         import_tag_index < module->module->import_tag_count;
-                         import_tag_index++) {
-                        WASMTagImport *im_tag =
-                            &(module->module->import_tags[import_tag_index]
-                                  .u.tag);
+                    WASMTagInstance *tag = module->tags;
+                    for (uint32 t = 0; t < module->module->import_tag_count;
+                         tag++, t++) {
 
                         /* compare the module and the external index with the
                          * imort tag data */
-                        if ((im_mod == im_tag->import_module)
-                            && (ext_exception == im_tag->tag_index_linked)) {
+                        if ((cur_func->u.func_import->import_module
+                             == tag->u.tag_import->import_module)
+                            && (ext_exception
+                                == tag->u.tag_import
+                                       ->import_tag_index_linked)) {
                             /* set the import_exception to the import tag */
-                            import_exception = import_tag_index;
+                            import_exception = t;
                             break;
                         }
                     }
                     /*
-                     * push the internal exception index to stack,
-                     * or 0xffffffff in case, the external exception
-                     * is not in the import list
+                     * excange the thrown exception (index valid in submodule)
+                     * with the imported exception index (valid in this module)
+                     * if the module did not import the exception,
+                     * that results in a "INVALID_TAGINDEX", that triggers
+                     * an CATCH_ALL block, if there is one.
                      */
                     PUSH_I32(import_exception);
                 }
