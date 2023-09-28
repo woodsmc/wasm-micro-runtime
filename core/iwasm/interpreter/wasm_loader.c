@@ -1496,6 +1496,9 @@ load_tag_import(const uint8 **p_buf, const uint8 *buf_end,
     WASMTag *linked_tag = wasm_loader_resolve_tag(
         sub_module_name, tag_name, declare_tag_type,
         &linked_tag_index /* out */, error_buf, error_buf_size);
+    if (!linked_tag) {
+        return false;
+    }
 #endif
     /* store to module tag declarations */
     tag->attribute = declare_tag_attribute;
