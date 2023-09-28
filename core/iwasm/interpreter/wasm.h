@@ -14,13 +14,6 @@
 extern "C" {
 #endif
 
-#if WASM_ENABLE_EXCE_HANDLING != 0
-#define _EXCEWARNING \
-    LOG_WARNING /* for exception handling misbehavior logging */
-#define _EXCEVERBOSE \
-    LOG_VERBOSE /* more excessive tracing of tagbrowsing and stack pointers */
-#endif
-
 /** Value Type */
 #define VALUE_TYPE_I32 0x7F
 #define VALUE_TYPE_I64 0X7E
