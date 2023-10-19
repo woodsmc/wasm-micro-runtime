@@ -7270,7 +7270,9 @@ check_block_stack(WASMLoaderContext *loader_ctx, BranchBlock *block,
 
     /* Check stack cell num equals return cell num */
     if (available_stack_cell != return_cell_num) {
-#if WASM_ENABLE_EXCE_HANDLING != 0
+#if 0
+// ReE: remove overcomplex return message
+if WASM_ENABLE_EXCE_HANDLING != 0
         /* testspec: this error message format is expected by try_catch.wast */
         snprintf(
             error_buf, error_buf_size, "type mismatch: %s requires [%s]%s[%s]",

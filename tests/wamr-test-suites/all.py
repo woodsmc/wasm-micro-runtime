@@ -1,0 +1,1 @@
+/workspaces/woodsmc-micro-runtime/tests/wamr-test-suites/workspace/../spec-test-script/all.py

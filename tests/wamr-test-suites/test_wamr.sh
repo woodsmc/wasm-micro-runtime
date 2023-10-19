@@ -502,12 +502,14 @@ function exception_test()
     if [ ! -d "exception-handling" ];then
         echo "exception-handling not exist, clone it from github"
         git clone -b master --single-branch https://github.com/WebAssembly/exception-handling
+
     fi
 
     pushd exception-handling
 
     # restore and clean everything
-    git reset --hard HEAD
+    git reset --hard 51c721661b671bb7dc4b3a3acb9e079b49778d36
+    git apply ../../spec-test-script/exception_handling.patch
 
     popd
     echo $(pwd)
@@ -558,6 +560,13 @@ function exception_test()
     ln -sf ${WORK_DIR}/../spec-test-script/runtest.py .
 
     local ARGS_FOR_SPEC_TEST="-e --no_clean_up "
+
+    # propagate multimodule if set
+    if [[ 1 == ${ENABLE_MULTI_MODULE} ]]; then
+        if [[ $1 == 'classic-interp' || $1 == 'fast-interp' ]]; then
+            ARGS_FOR_SPEC_TEST+="-M "
+        fi
+    fi
 
     # set log directory
     ARGS_FOR_SPEC_TEST+="--log ${REPORT_DIR}"
