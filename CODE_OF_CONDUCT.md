@@ -1,6 +1,6 @@
 # Contributor Covenant Code of Conduct
 
-*Note*: this Code of Conduct pertains to individuals' behavior. Please also see the [Organizational Code of Conduct][OCoC].
+*Note*: this Code of Conduct pertains to individuals' behavior. 
 
 ## Our Pledge
 
@@ -36,9 +36,9 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the Bytecode Alliance CoC team at [report@bytecodealliance.org](mailto:report@bytecodealliance.org). The CoC team will review and investigate all complaints, and will respond in a way that it deems appropriate to the circumstances. The CoC team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the WAMR team at [wamr-core@googlegroups.com](mailto:wamr-core@googlegroups.com). The WAMR team will review and investigate all complaints, and will respond in a way that it deems appropriate to the circumstances. The WAMR team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the Bytecode Alliance's leadership.
+Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the WAMR team.
 
 ## Attribution
 
