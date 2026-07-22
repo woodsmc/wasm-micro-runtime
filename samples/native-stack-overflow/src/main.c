@@ -80,7 +80,7 @@ main(int argc, char **argv)
     /*
      * disable app heap.
      * - we use wasi
-     * - https://github.com/bytecodealliance/wasm-micro-runtime/issues/2275
+     * - https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/2275
      */
     uint32 heap_size = 0;
 
@@ -173,7 +173,7 @@ main(int argc, char **argv)
          * note: non-zero "nest" here demonstrates resource leak on longjmp
          * from signal handler.
          * cf.
-         * https://github.com/bytecodealliance/wasm-micro-runtime/issues/3320
+         * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/3320
          */
         memset(rec, 0, sizeof(*rec));
         rec->failed = failed;

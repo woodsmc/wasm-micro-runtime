@@ -715,7 +715,7 @@ os_thread_signal_init(os_signal_handler handler)
 
 #if defined(os_thread_local_attribute)
     // calculate and cache the new stack boundary.
-    // see https://github.com/bytecodealliance/wasm-micro-runtime/issues/3966
+    // see https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/3966
     (void)os_thread_get_stack_boundary();
 #endif
 

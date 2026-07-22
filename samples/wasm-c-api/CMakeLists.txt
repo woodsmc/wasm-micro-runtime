@@ -135,7 +135,7 @@ if(${WAMR_BUILD_AOT} EQUAL 1 AND ${WAMR_BUILD_INTERP} EQUAL 0)
 
   if(NOT WAMRC)
     message(SEND_ERROR "can not find wamrc.  refer to \
-        https://github.com/bytecodealliance/wasm-micro-runtime#build-wamrc-aot-compiler"
+        https://github.com/wasm-micro-rutnime/wasm-micro-runtime#build-wamrc-aot-compiler"
     )
   endif()
 endif()

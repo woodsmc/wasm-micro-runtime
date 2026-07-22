@@ -30,5 +30,5 @@ configured.
 -   It's suggested to run `npm run lint` then fix errors and warnings before
     committing.
 
-[issue]: https://github.com/bytecodealliance/wasm-micro-runtime/issues
-[pull request]: https://github.com/bytecodealliance/wasm-micro-runtime/pulls
+[issue]: https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues
+[pull request]: https://github.com/wasm-micro-rutnime/wasm-micro-runtime/pulls

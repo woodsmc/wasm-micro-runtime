@@ -1,11 +1,8 @@
 # WebAssembly Micro Runtime
 
 
-**A [Bytecode Alliance][BA] project**
 
-[BA]: https://bytecodealliance.org/
-
-**[Guide](https://wamr.gitbook.io/)**&emsp;&emsp;**[Website](https://bytecodealliance.github.io/wamr.dev)**&emsp;&emsp;**[Chat](https://bytecodealliance.zulipchat.com/#narrow/stream/290350-wamr)**
+**[Guide](https://wamr.gitbook.io/)**&emsp;&emsp;**[Website](https://bytecodealliance.github.io/wamr.dev).
 
 [Build WAMR](./doc/build_wamr.md) | [Build AOT Compiler](./wamr-compiler/README.md) | [Embed WAMR](./doc/embed_wamr.md) | [Export Native API](./doc/export_native_api.md) | [Build Wasm Apps](./doc/build_wasm_app.md) | [Samples](./samples/README.md)
 
@@ -84,7 +81,7 @@ The following platforms are supported, click each link below for how to build iw
 - [Memory usage profiling](./doc/build_wamr.md#enable-memory-profiling-experiment): how to profile the memory usage
 - [Performance tuning](./doc/perf_tune.md): how to tune the performance
 - [Benchmarks](./tests/benchmarks): checkout these links for how to run the benchmarks: [PolyBench](./tests/benchmarks/polybench), [CoreMark](./tests/benchmarks/coremark), [Sightglass](./tests/benchmarks/sightglass), [JetStream2](./tests/benchmarks/jetstream)
-- [Performance and footprint data](https://github.com/bytecodealliance/wasm-micro-runtime/wiki/Performance): the performance and footprint data
+- [Performance and footprint data](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/wiki/Performance): the performance and footprint data
 
 
 Project Technical Steering Committee
@@ -113,7 +110,7 @@ use, modify, distribute and sell your own products based on WAMR.
 Any contributions you make will be under the same license.
 
 # More resources
-- [Who use WAMR?](https://github.com/bytecodealliance/wasm-micro-runtime/wiki)
+- [Who use WAMR?](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/wiki)
 - [WAMR Blogs](https://bytecodealliance.github.io/wamr.dev/blog/)
 - [Community news and events](https://bytecodealliance.github.io/wamr.dev/events/)
-- [WAMR TSC meetings](https://github.com/bytecodealliance/wasm-micro-runtime/wiki/TSC-meeting-notes)
+- [WAMR TSC meetings](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/wiki/TSC-meeting-notes)

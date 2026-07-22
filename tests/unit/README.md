@@ -103,7 +103,7 @@ git submodule update --init --recursive
 Alternatively, if you haven't cloned the repository yet, use `--recursive` when cloning:
 
 ```bash
-git clone --recursive https://github.com/bytecodealliance/wasm-micro-runtime.git
+git clone --recursive https://github.com/wasm-micro-rutnime/wasm-micro-runtime.git
 ```
 
 ---

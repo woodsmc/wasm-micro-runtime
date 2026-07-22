@@ -11860,7 +11860,7 @@ wasm_loader_prepare_bytecode(WASMModule *module, WASMFunction *func,
      * been copied to preserve space. For second traverse, this field will be
      * set to the appropriate value in wasm_loader_ctx_reinit.
      * This is for Issue #1230,
-     * https://github.com/bytecodealliance/wasm-micro-runtime/issues/1230, the
+     * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/1230, the
      * drop opcodes need to know which slots are preserved, so those slots will
      * not be treated as dynamically allocated slots */
     loader_ctx->preserved_local_offset = INT16_MAX;

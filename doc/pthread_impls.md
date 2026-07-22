@@ -56,4 +56,4 @@ In future, we might remove the old implementation.
 
 # References
 
-* https://github.com/bytecodealliance/wasm-micro-runtime/issues/1790
+* https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/1790

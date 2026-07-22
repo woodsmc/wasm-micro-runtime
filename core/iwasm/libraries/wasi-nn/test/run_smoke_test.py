@@ -322,7 +322,7 @@ def execute_wasmedge_wasinn_examples(iwasm_bin: str, wasmedge_bin: str):
     assert shutil.which(iwasm_bin)
     assert shutil.which(wasmedge_bin)
 
-    # TODO: keep commenting until https://github.com/bytecodealliance/wasm-micro-runtime/pull/3597 is merged
+    # TODO: keep commenting until https://github.com/wasm-micro-rutnime/wasm-micro-runtime/pull/3597 is merged
     # tflite_birds_v1_image_dir = Path.cwd().joinpath("./tflite-birds_v1-image")
     # execute_tflite_birds_v1_image(iwasm_bin, wasmedge_bin, tflite_birds_v1_image_dir)
 

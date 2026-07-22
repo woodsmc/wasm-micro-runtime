@@ -4,10 +4,10 @@
 
 # How to debug this extension
 > Note that when you download and
-> decompress to get .vsix file from [our release](https://github.com/bytecodealliance/wasm-micro-runtime/releases).
+> decompress to get .vsix file from [our release](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases).
 > It's by default that the `source debugging` feature is not enabled.
 > If you want to enable the `source debugging` feature of this extension,
-> you could  download `lldb` from [our release](https://github.com/bytecodealliance/wasm-micro-runtime/releases)
+> you could  download `lldb` from [our release](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases)
 > (This is the recommended way, and you could do it with a single click in VS Code).
 > Then if you want to use your customized lldb patch,
 > you could build your own version of `lldb`

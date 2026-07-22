@@ -116,7 +116,7 @@ function getDockerImagesDownloadUrl(
     context: vscode.ExtensionContext
 ): string[] {
     const wamrVersion = getWAMRExtensionVersion(context.extensionPath);
-    const wamrReleaseUrl = `https://github.com/bytecodealliance/wasm-micro-runtime/releases/download/WAMR`;
+    const wamrReleaseUrl = `https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases/download/WAMR`;
 
     return [
         `${wamrReleaseUrl}-${wamrVersion}/wasm-debug-server-${wamrVersion}.zip`,

@@ -179,14 +179,14 @@ aot_target_precheck_can_use_musttail(const AOTCompContext *comp_ctx)
     if (!strcmp(comp_ctx->target_arch, "mips")) {
         /*
          * cf.
-         * https://github.com/bytecodealliance/wasm-micro-runtime/issues/2412
+         * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/2412
          */
         return false;
     }
     if (strstr(comp_ctx->target_arch, "thumb")) {
         /*
          * cf.
-         * https://github.com/bytecodealliance/wasm-micro-runtime/issues/2412
+         * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/2412
          */
         return false;
     }

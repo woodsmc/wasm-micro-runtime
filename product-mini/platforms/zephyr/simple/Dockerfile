@@ -54,5 +54,5 @@ RUN west update --stats
 
 # Git clone wamr
 WORKDIR /root/zephyrproject/modules/
-RUN git clone https://github.com/bytecodealliance/wasm-micro-runtime.git wasm-micro-runtime
+RUN git clone https://github.com/wasm-micro-rutnime/wasm-micro-runtime.git wasm-micro-runtime
 WORKDIR /root/zephyrproject/modules/wasm-micro-runtime/product-mini/platforms/zephyr

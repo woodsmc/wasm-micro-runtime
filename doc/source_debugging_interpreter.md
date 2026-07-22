@@ -51,7 +51,7 @@ cmake --build build-lldb --target lldb --parallel $(nproc)
 ```
 > Note: If using `CommandLineTools` on MacOS, make sure only one SDK is present in `/Library/Developer/CommandLineTools/SDKs`.
 
-> You can download pre-built `wamr-lldb` binaries from [here](https://github.com/bytecodealliance/wasm-micro-runtime/releases).
+> You can download pre-built `wamr-lldb` binaries from [here](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases).
 
 5. Launch customized lldb and connect to iwasm
 ``` bash

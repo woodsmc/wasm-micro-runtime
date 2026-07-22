@@ -1399,7 +1399,7 @@ init_func_ptrs(AOTModuleInstance *module_inst, AOTModule *module,
              * will likely crash.
              *
              * See:
-             * https://github.com/bytecodealliance/wasm-micro-runtime/issues/4539
+             * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/4539
              *
              * Debugging: Check if the import is resolved at link time */
             LOG_WARNING("warning: failed to link import function (%s, %s)",
@@ -2508,7 +2508,7 @@ invoke_native_with_hw_bound_check(WASMExecEnv *exec_env, void *func_ptr,
      * NULL, unlike wasm_interp_call_func_import() and
      * wasm_interp_call_func_native().
      *
-     * See: https://github.com/bytecodealliance/wasm-micro-runtime/issues/4539
+     * See: https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/4539
      */
 
     if (os_setjmp(jmpbuf_node.jmpbuf) == 0) {

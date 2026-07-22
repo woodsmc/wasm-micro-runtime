@@ -2,7 +2,7 @@
 
 In this section, we aggregate some basic background knowledge and jargon in our project field. This section could be served as a refresher for those who have left academia for a while and cannot fully recall all the weary details and exact meaning of jargon in the Compiler course. Also, it would be a great primer for those who did not take such a course and are interested in such a field(and, of course, our fantastic WAMR project).
 
-We think providing such a section would be nice so that you do not have to Google around. If there is anything you find inaccurate, you think should be included, or even better, you have something for us that would perfect this section, do feel free to reach out to us on [GitHub](https://github.com/bytecodealliance/wasm-micro-runtime)!
+We think providing such a section would be nice so that you do not have to Google around. If there is anything you find inaccurate, you think should be included, or even better, you have something for us that would perfect this section, do feel free to reach out to us on [GitHub](https://github.com/wasm-micro-rutnime/wasm-micro-runtime)!
 
 Let's dive right into our exciting recitation/learning journey without further ado!
 

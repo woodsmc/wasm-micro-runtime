@@ -27,7 +27,7 @@ RUN wget --progress=dot:giga https://github.com/WebAssembly/wasi-sdk/releases/do
     && rm -f wasi-sdk-*-linux.tar.gz
 
 ##  - clone wamr repo
-RUN git clone -b main --depth=1 https://github.com/bytecodealliance/wasm-micro-runtime.git
+RUN git clone -b main --depth=1 https://github.com/wasm-micro-rutnime/wasm-micro-runtime.git
 
 WORKDIR /root/wasm-micro-runtime/build-scripts
 RUN pip3 install --no-cache-dir --user -r requirements.txt

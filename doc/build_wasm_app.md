@@ -406,7 +406,7 @@ using exactly same versions of wamrc and the runtime.
 Note: 2.4.0 had a broken AoT versioning. See [issue 4504] for details.
 We recommend all 2.4.0 users to migrate to 2.4.1.
 
-[issue 4504]: https://github.com/bytecodealliance/wasm-micro-runtime/issues/4504
+[issue 4504]: https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/4504
 
 ## AoT compilation with 3rd-party toolchains
 

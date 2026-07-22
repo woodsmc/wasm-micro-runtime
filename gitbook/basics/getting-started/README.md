@@ -7,7 +7,7 @@ Now, here is the last piece of gibberish before you get your hand dirty:
 Clone our source code repo and use
 
 ```sh
-git clone https://github.com/bytecodealliance/wasm-micro-runtime.git
+git clone https://github.com/wasm-micro-rutnime/wasm-micro-runtime.git
 ```
 
-Or download from <https://github.com/bytecodealliance/wasm-micro-runtime> use any way you like
+Or download from <https://github.com/wasm-micro-rutnime/wasm-micro-runtime> use any way you like

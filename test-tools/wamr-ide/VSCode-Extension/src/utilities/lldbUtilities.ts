@@ -48,7 +48,7 @@ function getLLDBDownloadUrl(extensionPath: string): string {
         throw WAMR_LLDB_NOT_SUPPORTED_ERROR;
     }
 
-    return `https://github.com/bytecodealliance/wasm-micro-runtime/releases/download/WAMR-${wamrVersion}/wamr-lldb-${wamrVersion}-${lldbOsUrlSuffix}.zip`;
+    return `https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases/download/WAMR-${wamrVersion}/wamr-lldb-${wamrVersion}-${lldbOsUrlSuffix}.zip`;
 }
 
 export function isLLDBInstalled(extensionPath: string): boolean {

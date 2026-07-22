@@ -4,7 +4,7 @@
 ;; Those tests verify if passing constant negative value
 ;; as a right parameter of the shift operator (along
 ;; with a constant value of the left operator) causes
-;; any problems. See: https://github.com/bytecodealliance/wasm-micro-runtime/pull/2619
+;; any problems. See: https://github.com/wasm-micro-rutnime/wasm-micro-runtime/pull/2619
 (module
   (memory (export "memory") 1 1)
 

@@ -54,7 +54,7 @@ setup(
     package_dir={"": "src"},
     author="The WAMR Project Developers",
     author_email="hello@bytecodealliance.org",
-    url="https://github.com/bytecodealliance/wasm-micro-runtime",
+    url="https://github.com/wasm-micro-rutnime/wasm-micro-runtime",
     license=license,
     include_package_data=True,
     cmdclass={

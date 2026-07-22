@@ -46,7 +46,7 @@ temp_module_table = {}
 aot_target_options_map = {
     "i386": ["--target=i386"],
     "x86_32": ["--target=i386"],
-    # cf. https://github.com/bytecodealliance/wasm-micro-runtime/issues/3035
+    # cf. https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/3035
     "x86_64": ["--target=x86_64", "--cpu=skylake", "--size-level=0"],
     "aarch64": ["--target=aarch64", "--target-abi=eabi", "--cpu=cortex-a53"],
     "aarch64_vfp": ["--target=aarch64", "--target-abi=gnueabihf", "--cpu=cortex-a53"],
@@ -1205,7 +1205,7 @@ def run_wasm_with_repl(wasm_tempfile, aot_tempfile, opts, r):
     if opts.gc:
         # our tail-call implementation is known broken.
         # work it around by using a huge stack.
-        # cf. https://github.com/bytecodealliance/wasm-micro-runtime/issues/2231
+        # cf. https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/2231
         cmd_iwasm.append("--stack-size=10485760")  # 10MB (!)
     else:
         if opts.aot:

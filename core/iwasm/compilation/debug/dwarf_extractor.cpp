@@ -301,8 +301,8 @@ lldb_function_to_function_dbi(const AOTCompContext *comp_ctx,
      * We have a few assumptions which might not be true for non-C functions.
      *
      * At least it's known broken for C++ and Rust:
-     * https://github.com/bytecodealliance/wasm-micro-runtime/issues/3187
-     * https://github.com/bytecodealliance/wasm-micro-runtime/issues/3163
+     * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/3187
+     * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/3163
      */
     LanguageType language_type = function.GetLanguage();
     bool cplusplus = false;

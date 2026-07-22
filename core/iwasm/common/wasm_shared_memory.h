@@ -35,7 +35,7 @@ shared_memory_dec_reference(WASMMemoryInstance *memory);
         /*                                                                    \
          * Note: exception logic is currently abusing this lock.              \
          * cf.                                                                \
-         * https://github.com/bytecodealliance/wasm-micro-runtime/issues/2407 \
+         * https://github.com/wasm-micro-rutnime/wasm-micro-runtime/issues/2407 \
          */                                                                   \
         bh_assert(memory != NULL);                                            \
         if (memory->is_shared_memory)                                         \

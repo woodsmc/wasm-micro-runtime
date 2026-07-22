@@ -54,7 +54,7 @@ On Release day:
 
 [Updated YYYY-MM-DD] Security release available.
 
-WAMR release version X.Y.Z is now available. The binary release can be found on GitHub at https://github.com/bytecodealliance/wasm-micro-runtime/releases/tag/WAMR-Y.Y.Z. This release addresses the following security issues rated XXX: https://the link of the advisory
+WAMR release version X.Y.Z is now available. The binary release can be found on GitHub at https://github.com/wasm-micro-rutnime/wasm-micro-runtime/releases/tag/WAMR-Y.Y.Z. This release addresses the following security issues rated XXX: https://the link of the advisory
 
 We’ll be conducting a full review of our security practices to ensure ample notification is provided for future security releases.
 ```

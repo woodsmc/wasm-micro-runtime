@@ -77,7 +77,7 @@
 
 * [How To Contribute](CONTRIBUTING.md)
 
-* [WAMR On Github](https://github.com/bytecodealliance/wasm-micro-runtime)
+* [WAMR On Github](https://github.com/wasm-micro-rutnime/wasm-micro-runtime)
 
 * [WAMR Blogs](https://bytecodealliance.github.io/wamr.dev/)
 

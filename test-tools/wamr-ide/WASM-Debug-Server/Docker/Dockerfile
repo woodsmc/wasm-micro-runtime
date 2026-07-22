@@ -12,7 +12,7 @@ RUN apt-get update  \
     && apt-get -y install make cmake --no-install-recommends
 
 ##  -clone wamr-repo and build iwasm
-RUN git clone -b main --depth=1 https://github.com/bytecodealliance/wasm-micro-runtime.git \
+RUN git clone -b main --depth=1 https://github.com/wasm-micro-rutnime/wasm-micro-runtime.git \
     && mkdir -p /root/wasm-micro-runtime/product-mini/platforms/linux/build
 
 WORKDIR /root/wasm-micro-runtime/product-mini/platforms/linux/build

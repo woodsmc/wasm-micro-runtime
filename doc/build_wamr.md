@@ -285,7 +285,7 @@ Use fast jit as the first tier and LLVM JIT as the second tier.
 - **WAMR_DISABLE_HW_BOUND_CHECK**=1/0, default to on if the platform supports it. Otherwise, software boundary checks are used.
 
 > [!NOTE]
-> By default only [linux/darwin/android/windows/vxworks 64-bit](https://github.com/bytecodealliance/wasm-micro-runtime/blob/5fb5119239220b0803e7045ca49b0a29fe65e70e/core/shared/platform/linux/platform_internal.h#L81) platforms enable this hardware trap boundary check. On 32-bit platforms it is off even if the flag is 0. The wamrc tool omits boundary check instructions in AOT code for all 64-bit targets except SGX to improve speed. The boundary check covers linear memory access and native stack access unless `WAMR_DISABLE_STACK_HW_BOUND_CHECK` is set.
+> By default only [linux/darwin/android/windows/vxworks 64-bit](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/blob/5fb5119239220b0803e7045ca49b0a29fe65e70e/core/shared/platform/linux/platform_internal.h#L81) platforms enable this hardware trap boundary check. On 32-bit platforms it is off even if the flag is 0. The wamrc tool omits boundary check instructions in AOT code for all 64-bit targets except SGX to improve speed. The boundary check covers linear memory access and native stack access unless `WAMR_DISABLE_STACK_HW_BOUND_CHECK` is set.
 
 ### **Disable native stack boundary check with hardware trap**
 
@@ -492,7 +492,7 @@ SIMDE (SIMD Everywhere) implements SIMD operations in fast interpreter mode.
 - **WAMR_DISABLE_WRITE_GS_BASE**=1/0, default to on if the platform supports it.
 
 > [!NOTE]
-> By default only [linux x86-64](https://github.com/bytecodealliance/wasm-micro-runtime/blob/5fb5119239220b0803e7045ca49b0a29fe65e70e/core/shared/platform/linux/platform_internal.h#L67) enables this. On 32-bit platforms it stays off even if set to 0. On linux x86-64, writing the linear memory base to the GS segment can speed up linear memory access for LLVM AOT/JIT when `--enable-segue=[<flags>]` is passed to `wamrc` or `iwasm`.
+> By default only [linux x86-64](https://github.com/wasm-micro-rutnime/wasm-micro-runtime/blob/5fb5119239220b0803e7045ca49b0a29fe65e70e/core/shared/platform/linux/platform_internal.h#L67) enables this. On 32-bit platforms it stays off even if set to 0. On linux x86-64, writing the linear memory base to the GS segment can speed up linear memory access for LLVM AOT/JIT when `--enable-segue=[<flags>]` is passed to `wamrc` or `iwasm`.
 >
 > See [segue optimization for wamrc when generating the aot file](./perf_tune.md#3-enable-segue-optimization-for-wamrc-when-generating-the-aot-file) for details.
 
