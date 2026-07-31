@@ -1,5 +1,7 @@
 # WebAssembly Micro Runtime
 
+## We've arrived at our new home!
+
 ## Notice: Moving WAMR's Home
 The Wasm Micro Runtime (WAMR) project will begin transitioning to a new home on Monday, July 27, 2026, with the process expected to be completed by Friday, July 31, 2026.
 
